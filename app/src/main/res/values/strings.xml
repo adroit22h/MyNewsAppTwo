@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyNewsAppOne</string>
+    <string name="article_section_name">Article Section Name</string>
+    <string name="article_title">Article Title</string>
+    <string name="article_author_name">Article Author Name</string>
+    <string name="article_pubdate">Article Publication Date</string>
+    <string name="error_message">Check to make sure you have Internet Access</string>
+    <string name="article_url">Article URL</string>
+</resources>
