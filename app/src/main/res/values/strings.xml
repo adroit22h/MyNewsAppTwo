@@ -1,9 +1,48 @@
 <resources>
-    <string name="app_name">MyNewsAppOne</string>
+    <string name="app_name">MyNewsAppTwo</string>
     <string name="article_section_name">Article Section Name</string>
     <string name="article_title">Article Title</string>
     <string name="article_author_name">Article Author Name</string>
     <string name="article_pubdate">Article Publication Date</string>
     <string name="error_message">Check to make sure you have Internet Access</string>
     <string name="article_url">Article URL</string>
+
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">My News App Settings</string>
+
+
+    <string name="news_order_label">Order By</string>
+    <string name="news_order_key" translatable="false">Sort by</string>
+
+    <string name="main_order" translatable="false">@string/news_sort_value</string>
+
+    <string-array name="news_order_labels">
+        <item>@string/news_sort_label</item>
+        <item>@string/news_sort_latest_label</item>
+    </string-array>
+
+    <string-array name="news_order_values">
+        <item>@string/news_sort_label</item>
+        <item>@string/news_sort_value</item>
+    </string-array>
+
+
+    <string name="news_total_articles">Total Articles</string>
+    <string name="settings_total_articles_key" translatable="false">totalArticles</string>
+
+    <string name="news_sort_label">Relevance</string>
+    <string name="news_sort_value" translatable="false">relevance</string>
+
+
+    <string name="news_sort_latest_label">Newest</string>
 </resources>
+
+
+
+
+
+
+
+
+
+

@@ -5,11 +5,16 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -64,10 +69,46 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
+//    @Override
+////    public Loader<List<MyNews>> onCreateLoader(int id, Bundle bundle) {
+////        return new MyNewsLoader(this, REQUEST_URL);
+////    }
+
     @Override
     public Loader<List<MyNews>> onCreateLoader(int id, Bundle bundle) {
-        return new MyNewsLoader(this, REQUEST_URL);
+        //return new MyNewsLoader(this, REQUEST_URL);
+
+
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String orderBy  = sharedPrefs.getString(
+                getString(R.string.news_order_key),
+                getString(R.string.main_order)
+        );
+
+        String totalArticles = sharedPrefs.getString(getString(R.string.news_total_articles), getString(R.string.news_sort_label));
+        // parse breaks apart the URI string that's passed into its parameter
+        Uri baseUri = Uri.parse("https://content.guardianapis.com/search?show-tags=contributor&api-key=0bd3322e-7c04-40dd-9395-e9e9064ffc37");
+
+        // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        // Append query parameter and its value. For example, the `q=music``
+        uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("page-size", totalArticles);
+        uriBuilder.appendQueryParameter("q", "music");
+//        uriBuilder.appendQueryParameter("api-key", apiKey);
+//        Log.i(LOG_TAG, uriBuilder.toString());
+        return new MyNewsLoader(this, uriBuilder.toString());
+
     }
+
+
+
+
+
 
     @Override
     public void onLoadFinished(Loader<List<MyNews>> loader, List<MyNews> news) {
@@ -84,5 +125,25 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<List<MyNews>> loader) {
         mAdapter.clear();
+    }
+
+
+    @Override
+    // This method initialize the contents of the Activity's options menu.
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the Options Menu we specified in XML
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
