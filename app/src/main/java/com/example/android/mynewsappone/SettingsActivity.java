@@ -1,45 +1,44 @@
-package com.example.android.mynewsapptwo;
+package com.example.android.mynewsappone;
 
+import android.content.Loader;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.preference.PreferenceManager;
-import android.os.Bundle;
-import android.preference.PreferenceFragment;
-import android.support.v7.app.AppCompatActivity;
+
+import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings_activity);
+        setContentView(R.layout.settings_activity);
     }
 
-    public static class MyNewsAppTwoPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener{
+    public static class MyNewsAppOnePreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
 
-            Preference orderBy = findPreference(getString(R.string.news_order_key));
+
+            Preference orderBy = findPreference(getString(R.string.settings_requestnews_by_key));
             bindPreferenceSummaryToValue(orderBy);
 
-            Preference totalArticles = findPreference(getString(R.string.news_total_articles));
-            bindPreferenceSummaryToValue(totalArticles);
-
+            Preference numArticles = findPreference(getString(R.string.settings_requestnum_articles_key));
+            bindPreferenceSummaryToValue(numArticles);
         }
+
 
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
-
+            // The code in this method takes care of updating the displayed preference summary after it has been changed
             String stringValue = value.toString();
             if (preference instanceof ListPreference) {
                 ListPreference listPreference = (ListPreference) preference;
@@ -59,7 +58,11 @@ public class SettingsActivity extends AppCompatActivity {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
             String preferenceString = preferences.getString(preference.getKey(), "");
             onPreferenceChange(preference, preferenceString);
+
+
         }
     }
 }
+
+
 

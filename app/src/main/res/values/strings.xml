@@ -8,41 +8,40 @@
     <string name="article_url">Article URL</string>
 
     <string name="settings_menu_item">Settings</string>
-    <string name="settings_title">My News App Settings</string>
+    <string name="settings_title">My News Settings</string>
+
+    <string name="myauthor">No author.....</string>
 
 
-    <string name="news_order_label">Order By</string>
-    <string name="news_order_key" translatable="false">Sort by</string>
 
-    <string name="main_order" translatable="false">@string/news_sort_value</string>
 
-    <string-array name="news_order_labels">
-        <item>@string/news_sort_label</item>
-        <item>@string/news_sort_latest_label</item>
+
+
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_requestnews_by_key" translatable="false">order_by</string>
+
+    <string name="settings_order_by_newest_label">Newest</string>
+    <string name="settings_order_by_newest_value" translatable="false">newest</string>
+
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_newest_value</string>
+
+    <string name="settings_num_articles_label">Number of Articles displayed</string>
+    <string name="settings_requestnum_articles_key" translatable="false">numArticles</string>
+    <string name="settings_num_articles_default" translatable="false">5</string>
+
+    <string name="settings_order_by_relevance_label">Relevance</string>
+    <string name="settings_order_by_relevance_value" translatable="false">relevance</string>
+    <string name="no_author">No Author ..</string>
+
+    <string-array name="settings_order_by_labels">
+        <item>@string/settings_order_by_relevance_label</item>
+        <item>@string/settings_order_by_newest_label</item>
     </string-array>
 
-    <string-array name="news_order_values">
-        <item>@string/news_sort_label</item>
-        <item>@string/news_sort_value</item>
+    <string-array name="settings_order_by_values">
+        <item>@string/settings_order_by_relevance_value</item>
+        <item>@string/settings_order_by_newest_value</item>
     </string-array>
 
 
-    <string name="news_total_articles">Total Articles</string>
-    <string name="settings_total_articles_key" translatable="false">totalArticles</string>
-
-    <string name="news_sort_label">Relevance</string>
-    <string name="news_sort_value" translatable="false">relevance</string>
-
-
-    <string name="news_sort_latest_label">Newest</string>
 </resources>
-
-
-
-
-
-
-
-
-
-

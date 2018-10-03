@@ -1,5 +1,4 @@
-package com.example.android.mynewsapptwo;
-
+package com.example.android.mynewsappone;
 
 import android.app.LoaderManager;
 import android.content.Context;
@@ -28,9 +27,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private MyNewsAdapter mAdapter;
     private TextView mNoContentTextView;
 
-    /** URL for news data from the Guardian API */
-    private static final String REQUEST_URL =
-            "https://content.guardianapis.com/search?show-tags=contributor&api-key=0bd3322e-7c04-40dd-9395-e9e9064ffc37";
+    public String res = getString(R.string.myauthor);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,47 +65,40 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mNoContentTextView.setText(R.string.error_message);
         }
     }
-
-//    @Override
-////    public Loader<List<MyNews>> onCreateLoader(int id, Bundle bundle) {
-////        return new MyNewsLoader(this, REQUEST_URL);
-////    }
-
+    //NewsAppII
+    private static final String guardian_REQUEST_URL = "https://content.guardianapis.com/search?show-tags=contributor";
+    private static final String apikey = "0bd3322e-7c04-40dd-9395-e9e9064ffc37";
     @Override
     public Loader<List<MyNews>> onCreateLoader(int id, Bundle bundle) {
-        //return new MyNewsLoader(this, REQUEST_URL);
-
 
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         String orderBy  = sharedPrefs.getString(
-                getString(R.string.news_order_key),
-                getString(R.string.main_order)
+                getString(R.string.settings_requestnews_by_key),
+                getString(R.string.settings_order_by_default)
         );
 
-        String totalArticles = sharedPrefs.getString(getString(R.string.news_total_articles), getString(R.string.news_sort_label));
+        String numArticles = sharedPrefs.getString(getString(R.string.settings_requestnum_articles_key), getString(R.string.settings_num_articles_label));
         // parse breaks apart the URI string that's passed into its parameter
-        Uri baseUri = Uri.parse("https://content.guardianapis.com/search?show-tags=contributor&api-key=0bd3322e-7c04-40dd-9395-e9e9064ffc37");
+        Uri baseUri = Uri.parse(guardian_REQUEST_URL);
 
         // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        // Append query parameter and its value. For example, the `q=music``
+        // Append query parameter and its value. For example, the `section football``
         uriBuilder.appendQueryParameter("order-by", orderBy);
         uriBuilder.appendQueryParameter("show-tags", "contributor");
-        uriBuilder.appendQueryParameter("page-size", totalArticles);
-        uriBuilder.appendQueryParameter("q", "music");
-//        uriBuilder.appendQueryParameter("api-key", apiKey);
-//        Log.i(LOG_TAG, uriBuilder.toString());
-        return new MyNewsLoader(this, uriBuilder.toString());
-
-    }
+        uriBuilder.appendQueryParameter("page-size", numArticles);
+        uriBuilder.appendQueryParameter("section", "football");
+        uriBuilder.appendQueryParameter("api-key", apikey);
 
 
 
 
+     return new MyNewsLoader(this, uriBuilder.toString());
 
+   }
 
     @Override
     public void onLoadFinished(Loader<List<MyNews>> loader, List<MyNews> news) {
@@ -126,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoaderReset(Loader<List<MyNews>> loader) {
         mAdapter.clear();
     }
+
 
 
     @Override
@@ -146,4 +137,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
         return super.onOptionsItemSelected(item);
     }
-}
+
+    }
+
+
+
+

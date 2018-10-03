@@ -1,5 +1,7 @@
-package com.example.android.mynewsapptwo;
+package com.example.android.mynewsappone;
 
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -19,7 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyNewsQueryUtils {
-    //This page pull the tags from the guardian api website
+//This page pull the tags from the guardian api website
+
+
+
     public static List<MyNews> fetchNewsData(String requestUrl) {
         URL url = createUrl(requestUrl);
 
@@ -101,6 +106,8 @@ public class MyNewsQueryUtils {
         return output.toString();
     }
 
+
+
     private static List<MyNews> extractFeatureFromJson(String newsJSON) {
         if (TextUtils.isEmpty(newsJSON)) {
             return null;
@@ -129,7 +136,9 @@ public class MyNewsQueryUtils {
                     JSONObject currenttagsauthor = tagsauthor.getJSONObject(0);
                     author = currenttagsauthor.getString("webTitle");
                 }else{
-                    author = "No Author ..";
+                    author ="";
+                     
+
                 }
 
                 MyNews news = new MyNews(Title, category, date, author, url);
@@ -145,5 +154,4 @@ public class MyNewsQueryUtils {
         return newsList;
     }
 }
-
 

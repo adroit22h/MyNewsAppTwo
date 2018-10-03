@@ -1,4 +1,4 @@
-package com.example.android.mynewsapptwo;
+package com.example.android.mynewsappone;
 
 public class MyNews {
     private String mArticleTitle;

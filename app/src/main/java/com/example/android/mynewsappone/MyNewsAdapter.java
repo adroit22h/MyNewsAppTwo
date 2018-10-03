@@ -1,5 +1,4 @@
-package com.example.android.mynewsapptwo;
-
+package com.example.android.mynewsappone;
 
 import android.content.Context;
 import android.view.LayoutInflater;
